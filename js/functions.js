@@ -1,3 +1,7 @@
+function submit(){
+	$url = $(".link");
+	getYoutubeVideoID($url);
+}
 // URL parser
 function getYoutubeVideoID($url){
 	$video_id = false;

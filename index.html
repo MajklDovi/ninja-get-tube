@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="project">
 	<head>
 		<title>YouTube DB</title>
 		<meta charset="utf-8" />
@@ -33,10 +33,10 @@
 		</div>
 
 		<div class="container">
-			<div class="hero-unit" ng-controller="videos">
+			<div class="hero-unit" ng-view ng-controller="videos">
 				<label>Add new video</label>
-				<input type="url">
-				<input class="btn-primary" type="submit" value="add">
+				<input type="url" class="link">
+				<input class="btn-primary" type="submit" value="Add" onclick="submit();">
 				<table class="table">
 					<tr ng-repeat="video in videos">
 						<td><span>{{video.name}}</span></td>
