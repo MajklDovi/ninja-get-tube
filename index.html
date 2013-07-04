@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
 	<head>
 		<title>YouTube DB</title>
 		<meta charset="utf-8" />
@@ -8,7 +8,9 @@
 		
 		<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
 		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		<script src="js/jquery.js"></script>
+		<script src="js/functions.js"></script>
 	</head>
 
 	<body>
@@ -23,7 +25,7 @@
 			  <a class="brand" href="#">YouTube video DB</a>
 			  <div class="nav-collapse collapse">
 				<ul class="nav">
-				  <li class="active"><a href="index.html">YouTube DB</a></li>
+				  <li class="active"><a href="#">YouTube DB</a></li>
 				</ul>
 			  </div><!--/.nav-collapse -->
 			</div>
@@ -31,8 +33,18 @@
 		</div>
 
 		<div class="container">
-			<div class="hero-unit" ng-controller="">
-			</div>
+			<div class="hero-unit" ng-controller="videos">
+				<label>Add new video</label>
+				<input type="url">
+				<input class="btn-primary" type="submit" value="add">
+				<table class="table">
+					<tr ng-repeat="video in videos">
+						<td><span>{{video.name}}</span></td>
+						<td><span>{{video.url}}</span></td>
+						<td><span>{{video.check}}</span></td>
+					</tr>
+				</table>
+			</div> <!-- /hero-unit -->
 		</div> <!-- /container -->
 	</body>
 </html>
