@@ -18,3 +18,5 @@ angular.module('mongolab', ['ngResource']).
  
       return Project;
     });
+	
+

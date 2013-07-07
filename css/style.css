@@ -14,11 +14,17 @@
 	overflow: hidden;
 }
 
-table td .size {
-	width: 50px;
-	max-width: 50px;
-	overflow:hidden;
+
+table tr {
+	border: 1px solid;
 }
+table td {
+	max-width: 700px;
+	max-height:80px;
+	padding:10px;
+	overflow: hidden;
+}
+
 
 input[type=file] {
     display:none;

@@ -1,7 +1,11 @@
-				<table class="table">
-					<tr ng-repeat="video in videos">
-						<td><span>{{video.name}}</span></td>
-						<td><span>{{video.url}}</span></td>
-						<td><span>{{video.check}}</span></td>
-					</tr>
-				</table>
+<!-- PRINT OUT VIDEOS THUMBNAILS -->
+<table>
+		<tr ng-repeat="project in projects">
+			<td class="image"><img ng-src="{{project.data.thumbnail.sqDefault}}"></td>
+			<td><h5>{{project.data.title}}<h5>
+				<h6>Autor: {{project.data.uploader}}</h6>
+				<h6>Description: {{project.data.description}}</h6>
+			</td>
+		</tr>
+</table>
+

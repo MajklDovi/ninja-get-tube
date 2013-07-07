@@ -4,17 +4,16 @@
 		<title>YouTube DB</title>
 		<meta charset="utf-8" />
 		
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
 		<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
 		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-		<script src="js/jquery.js"></script>
-		<script src="js/functions.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+
 		<script src="js/project.js"></script>
 		<script src="js/mongolab.js"></script>
+		<script src="js/functions.js"></script>
 	</head>
-
 	<body>
 		<div class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="navbar-inner">
@@ -37,17 +36,13 @@
 		<div class="container">
 			<div class="hero-unit">
 				<label>Add new video</label>
-				<input type="url" class="link" ng-model="text" required>
+				<input type="url" class="search-query" ng-model="text" required>
 				<input class="btn-primary" type="submit" value="Add" onclick="submit();">
-				<div ng-controller="Archive">
-					<div id="tasks">
-						<div ng-view></div>
-					</div><!-- tasks -->
-				</div><!-- ng-controller -->
-				
-					
-
+				<hr>
+				<div ng-view></div> <!-- /list of videos -->
 			</div> <!-- /hero-unit -->
 		</div> <!-- /container -->
+
+
 	</body>
 </html>

@@ -2,18 +2,20 @@ angular.module('project', ['mongolab']).
   config(function($routeProvider) {
     $routeProvider.
       when('/', {controller:ListCtrl, templateUrl:'list.html'}).
+      when('/new', {controller:CreateCtrl, templateUrl:'list.html'}).
+      when('/edit/:projectId', {controller:EditCtrl, templateUrl:'detail.html'}).
       otherwise({redirectTo:'/'});
   });
 
 function ListCtrl($scope, Project) {
-  $scope.videos = Project.query();
+  $scope.projects = Project.query();
   $scope.archive = function() {
-    var oldVideos = $scope.videos;
-    $scope.videos = [];
+    var oldTodos = $scope.projects;
+    $scope.projects = [];
     $scope.doneProjects = [];
-    angular.forEach(oldTodos, function(video) {
-      if (!video.done) $scope.videos.push(video);
-      else $scope.doneProjects.push(video);
+    angular.forEach(oldTodos, function(project) {
+      if (!project.done) $scope.projects.push(project);
+      else $scope.doneProjects.push(project);
     });
   }	
 }
@@ -21,8 +23,8 @@ function ListCtrl($scope, Project) {
  
 function CreateCtrl($scope, $location, Project) {
   $scope.save = function() {
-    Project.save($scope.video, function(video) {
-      $location.path('/edit/' + video._id.$oid);
+    Project.save($scope.project, function(project) {
+      $location.path('/edit/' + project._id.$oid);
     });
   }
 }
@@ -31,13 +33,13 @@ function CreateCtrl($scope, $location, Project) {
 function EditCtrl($scope, $location, $routeParams, Project) {
   var self = this;
  
-  Project.get({id: $routeParams.projectId}, function(video) {
-    self.original = video;
-    $scope.video = new Project(self.original);
+  Project.get({id: $routeParams.projectId}, function(project) {
+    self.original = project;
+    $scope.project = new Project(self.original);
   });
  
   $scope.isClean = function() {
-    return angular.equals(self.original, $scope.video);
+    return angular.equals(self.original, $scope.project);
   }
 
   
@@ -49,7 +51,7 @@ function EditCtrl($scope, $location, $routeParams, Project) {
   };
  
   $scope.save = function() {
-    $scope.video.update(function() {
+    $scope.project.update(function() {
       $location.path('/');
     });
   };
@@ -61,19 +63,19 @@ function TodoCtrl($scope, Project) {
   $scope.trash = function() {
     var oldTodos = $scope.doneProjects;
     $scope.doneProjects = [];
-    angular.forEach(oldTodos, function(video) {
-      if (!video.done) $scope.doneProjects.push(video);
+    angular.forEach(oldTodos, function(project) {
+      if (!project.done) $scope.doneProjects.push(project);
     });
   };
 }
 function Archive($scope, Project) { 
   $scope.archive = function() {
-    var oldVideos = $scope.videos;
-    $scope.videos = [];
+    var oldTodos = $scope.projects;
+    $scope.projects = [];
     $scope.doneProjects = [];
-    angular.forEach(oldVideos, function(video) {
-      if (!video.done) $scope.projects.push(video);
-      else $scope.doneProjects.push(video);
+    angular.forEach(oldTodos, function(project) {
+      if (!project.done) $scope.projects.push(project);
+      else $scope.doneProjects.push(project);
     });
   };
 }
