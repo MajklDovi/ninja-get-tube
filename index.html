@@ -35,7 +35,7 @@
 		<div class="container">
 			<div class="hero-unit" ng-view ng-controller="videos">
 				<label>Add new video</label>
-				<input type="url" class="link">
+				<input type="url" class="link" ng-model="text" required>
 				<input class="btn-primary" type="submit" value="Add" onclick="submit();">
 				<table class="table">
 					<tr ng-repeat="video in videos">

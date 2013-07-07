@@ -6,14 +6,14 @@ angular.module('project', ['mongolab']).
   });
 
 function ListCtrl($scope, Project) {
-  $scope.projects = Project.query();
+  $scope.videos = Project.query();
   $scope.archive = function() {
-    var oldTodos = $scope.projects;
-    $scope.projects = [];
+    var oldVideos = $scope.videos;
+    $scope.videos = [];
     $scope.doneProjects = [];
-    angular.forEach(oldTodos, function(project) {
-      if (!project.done) $scope.projects.push(project);
-      else $scope.doneProjects.push(project);
+    angular.forEach(oldTodos, function(video) {
+      if (!video.done) $scope.videos.push(video);
+      else $scope.doneProjects.push(video);
     });
   }	
 }
@@ -21,8 +21,8 @@ function ListCtrl($scope, Project) {
  
 function CreateCtrl($scope, $location, Project) {
   $scope.save = function() {
-    Project.save($scope.project, function(project) {
-      $location.path('/edit/' + project._id.$oid);
+    Project.save($scope.video, function(video) {
+      $location.path('/edit/' + video._id.$oid);
     });
   }
 }
@@ -31,13 +31,13 @@ function CreateCtrl($scope, $location, Project) {
 function EditCtrl($scope, $location, $routeParams, Project) {
   var self = this;
  
-  Project.get({id: $routeParams.projectId}, function(project) {
-    self.original = project;
-    $scope.project = new Project(self.original);
+  Project.get({id: $routeParams.projectId}, function(video) {
+    self.original = video;
+    $scope.video = new Project(self.original);
   });
  
   $scope.isClean = function() {
-    return angular.equals(self.original, $scope.project);
+    return angular.equals(self.original, $scope.video);
   }
 
   
@@ -49,7 +49,7 @@ function EditCtrl($scope, $location, $routeParams, Project) {
   };
  
   $scope.save = function() {
-    $scope.project.update(function() {
+    $scope.video.update(function() {
       $location.path('/');
     });
   };
@@ -61,19 +61,19 @@ function TodoCtrl($scope, Project) {
   $scope.trash = function() {
     var oldTodos = $scope.doneProjects;
     $scope.doneProjects = [];
-    angular.forEach(oldTodos, function(project) {
-      if (!project.done) $scope.doneProjects.push(project);
+    angular.forEach(oldTodos, function(video) {
+      if (!video.done) $scope.doneProjects.push(video);
     });
   };
 }
 function Archive($scope, Project) { 
   $scope.archive = function() {
-    var oldTodos = $scope.projects;
-    $scope.projects = [];
+    var oldVideos = $scope.videos;
+    $scope.videos = [];
     $scope.doneProjects = [];
-    angular.forEach(oldTodos, function(project) {
-      if (!project.done) $scope.projects.push(project);
-      else $scope.doneProjects.push(project);
+    angular.forEach(oldVideos, function(video) {
+      if (!video.done) $scope.projects.push(video);
+      else $scope.doneProjects.push(video);
     });
   };
 }
