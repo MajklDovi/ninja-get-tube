@@ -9,7 +9,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
-
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		
 		<script src="js/project.js"></script>
 		<script src="js/mongolab.js"></script>
 		<script src="js/functions.js"></script>
@@ -35,11 +36,15 @@
 
 		<div class="container">
 			<div class="hero-unit">
-				<label>Add new video</label>
-				<input type="url" class="search-query" ng-model="text" required>
-				<input class="btn-primary" type="submit" value="Add" onclick="submit();">
-				<hr>
-				<div ng-view></div> <!-- /list of videos -->
+				<div ng-controller="CreateCtrl">
+					<form name="form" onsubmit="return inputForm()">
+						<label>Add new video</label>
+						<input type="url" name="link" class="search-query" required>
+						<input class="btn-primary btn-small" type="submit" value="Add">
+					</form>
+					<hr>
+					<div ng-view></div> <!-- /list of videos -->
+				</div>
 			</div> <!-- /hero-unit -->
 		</div> <!-- /container -->
 

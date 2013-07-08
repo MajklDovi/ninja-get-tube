@@ -13,10 +13,6 @@ function ListCtrl($scope, Project) {
     var oldTodos = $scope.projects;
     $scope.projects = [];
     $scope.doneProjects = [];
-    angular.forEach(oldTodos, function(project) {
-      if (!project.done) $scope.projects.push(project);
-      else $scope.doneProjects.push(project);
-    });
   }	
 }
  
@@ -58,26 +54,7 @@ function EditCtrl($scope, $location, $routeParams, Project) {
 }
 
 
-function TodoCtrl($scope, Project) {
 
-  $scope.trash = function() {
-    var oldTodos = $scope.doneProjects;
-    $scope.doneProjects = [];
-    angular.forEach(oldTodos, function(project) {
-      if (!project.done) $scope.doneProjects.push(project);
-    });
-  };
-}
-function Archive($scope, Project) { 
-  $scope.archive = function() {
-    var oldTodos = $scope.projects;
-    $scope.projects = [];
-    $scope.doneProjects = [];
-    angular.forEach(oldTodos, function(project) {
-      if (!project.done) $scope.projects.push(project);
-      else $scope.doneProjects.push(project);
-    });
-  };
-}
+
 
 

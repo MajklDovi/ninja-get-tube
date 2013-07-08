@@ -1,38 +1,28 @@
-function submit(){
-	$url = $(".link");
-	getYoutubeVideoID($url);
+/*
+ *
+ *  Copyright (c) Michal Dovičovič
+ *
+ */
+
+// Input form with link parser
+function inputForm(){
+		var url = document.forms["form"]["link"].value;
+		// URL parser
+		var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+		var match = url.match(regExp);
+		if (match&&match[7].length==11){
+			var b=match[7];
+			var video_id = b;
+		}else{
+			alert("Not a YouTube address!");
+		}
+
+		$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+video_id+'?v=2&alt=jsonc',function(data,status,xhr){
+			alert(data.data.title);
+		});
 }
-// URL parser
-function getYoutubeVideoID($url){
-	$video_id = false;
-	$url = parse_url($url);
-	
-	if (strcasecmp($url['host'], 'youtu.be') === 0)
-    {
-        //youtu.be/<video id>
-        $video_id = substr($url['path'], 1);
-    }
-    elseif (strcasecmp($url['host'], 'www.youtube.com') === 0)
-    {
-        if (isset($url['query']))
-        {
-            parse_str($url['query'], $url['query']);
-            if (isset($url['query']['v']))
-            {
-                //www.youtube.com/(dontcare)?v=<video id>
-                $video_id = $url['query']['v'];
-            }
-        }
-        if ($video_id == false)
-        {
-            $url['path'] = explode('/', substr($url['path'], 1));
-            if (in_array($url['path'][0], array('e', 'embed', 'v')))
-            {
-                //www.youtube.com/(whitelist)/<video id>
-                $video_id = $url['path'][1];
-            }
-        }
-    }
-    return $video_id;
-}
+
+
+
+
 
