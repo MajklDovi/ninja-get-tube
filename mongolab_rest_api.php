@@ -1,25 +1,16 @@
 <?php
+	// Don't poison me with error messages
 	error_reporting(0);
+	
 	// Mongolab DB info
 	$MONGOLAB_API_KEY = 'YvpGKIHI0-i5YJgS_Z3AtcZrj1prgDWc';
 	$DB = 'videos';
 	$COLLECTION = 'videos';
 
-// TO DO!!!!	 
-	$name = $_POST['fullName'];
-	$email = $_POST['email'];
-	$phone = $_POST['phoneNumber'];
-	$src  = $_POST['src'];
-	$milliseconds = round(microtime(true) * 1000);
+	// Save ID of the YouTube video
+	$id = $_POST['ID'];
 	 
-	$data = json_encode(
-	  array("fullname" => $name,
-		"email" => $email,
-		"phone" => $phone,
-		"src" => $src,
-		"date" => array('$date' => $milliseconds)
-	  )
-	);
+	$data = json_encode( array( "ID" => $id) );
 	 
 	$url = "https://api.mongolab.com/api/1/databases/$DB/collections/$COLLECTION?apiKey=$MONGOLAB_API_KEY";
 	 

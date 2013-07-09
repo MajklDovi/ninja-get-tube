@@ -11,8 +11,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		
-		<script src="js/project.js"></script>
-		<script src="js/mongolab.js"></script>
+		<!-- <script src="js/project.js"></script>
+		<script src="js/mongolab.js"></script> -->
 		<script src="js/functions.js"></script>
 	</head>
 	<body>
@@ -36,13 +36,15 @@
 
 		<div class="container">
 			<div class="hero-unit">
-				<div ng-controller="CreateCtrl">
-					<form name="form" onsubmit="return inputForm()">
+				<div ng-controller="ListCtrl">
+					<form name="form">
 						<label>Add new video</label>
 						<input type="url" name="link" class="search-query" required>
-						<input class="btn-primary btn-small" type="submit" value="Add">
+						<input class="btn-primary btn-small" type="submit" value="Add" onclick="inputForm()" ng-click="updateModel('POST', '/add')">
 					</form>
-					<hr>
+				</div>
+				<hr>
+				<div ng-controller="CreateCtrl">
 					<div ng-view></div> <!-- /list of videos -->
 				</div>
 			</div> <!-- /hero-unit -->

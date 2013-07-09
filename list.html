@@ -1,10 +1,10 @@
 <!-- PRINT OUT VIDEOS THUMBNAILS -->
-<table>
-		<tr ng-repeat="project in projects">
-			<td class="image"><img ng-src="{{project.data.thumbnail.sqDefault}}"></td>
-			<td><h5>{{project.data.title}}<h5>
-				<h6>Autor: {{project.data.uploader}}</h6>
-				<h6>Description: {{project.data.description}}</h6>
+<table ng-controller="VideoListCtrl">
+		<tr ng-repeat="video in data">
+			<td class="image"><img ng-src="{{video.thumbnail.sqDefault}}"></td>
+			<td><h5>{{video.title}}<h5>
+				<h6>Autor: {{video.uploader}}</h6>
+				<h6>Description: {{video.description}}</h6>
 			</td>
 		</tr>
 </table>
