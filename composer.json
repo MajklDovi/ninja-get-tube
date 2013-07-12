@@ -12,9 +12,10 @@
             "homepage": "http://www.joshlockhart.com/"
         }
     ],
-    "require": {
-        "php": ">=5.3.0"
-    },
+    "require": [{
+        "php": ">=5.3.0",
+	 "slim/slim": "2.*"
+    }],
     "autoload": {
         "psr-0": { "Slim": "." }
     }

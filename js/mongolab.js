@@ -1,7 +1,7 @@
 angular.module('mongolab', ['ngResource']).
     factory('Project', function($resource) {
       var Project = $resource('https://api.mongolab.com/api/1/databases' +
-          '/videos/collections/videos/:id',
+          '/tasks/collections/tasks/:id',
           { apiKey: 'YvpGKIHI0-i5YJgS_Z3AtcZrj1prgDWc' }, {
             update: { method: 'PUT' }
           }

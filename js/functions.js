@@ -4,21 +4,14 @@
  *
  */
 
-
+// Define route provider
 angular.module('project', []).
-  config(function($routeProvider) {
+  config(['$routeProvider', function($routeProvider) {
     $routeProvider.
-      when('/', {controller:ListCtrl, templateUrl:'list.html'}).
+      when('/videos', {controller:ListCtrl, templateUrl:'list.html'}).
       when('/add', {controller:CreateCtrl, templateUrl:'list.html'}).
-      otherwise({redirectTo:'/'});
-  });
-
-function VideoListCtrl() {
-   // this.videos = Video.query();
-
-}
-
-
+      otherwise({redirectTo:'/videos'});
+  }]);
 
 
 // Input form with link parser
@@ -35,26 +28,39 @@ function inputForm() {
 		}
 
 		$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+video_id+'?v=2&alt=jsonc',function(data,status,xhr){
-			alert(data.data.title);
-			
+			//alert(data.data.title);
+		
+
+		$.ajax({
+			type: 'POST',
+			contentType: 'application/json',
+			url: 'index.php/add',
+			dataType: "json",
+			data: JSON.stringify({
+				 "id": video_id,
+				 "title": data.data.title,
+				 "image": data.data.thumbnail.sqDefault,
+				 "author": data.data.uploader,
+				 "description": data.data.description,
+				 "link": url
+			}),
+			success: function(data, textStatus, jqXHR){
+				alert('Video created successfully' + data);
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				alert('addVideo error: ' + textStatus);
+			}
+		});
 
 		});
 }
 
 function ListCtrl($scope, $http) {
-	$scope.video_id = "3f3n4DZvaIg";
-	$http({method: 'POST', url: 'http://www.stud.fit.vutbr.cz/~xdovic00/tube/videos', data: { "ID" : $scope.video_id }}).
-		success(function(data, status) {
-			$scope.data = data;
-			alert(data);
-		}).	
-		error(function(data, status, headers, config) {
-			$scope.status = status;
-		});
+
 }
 
 function CreateCtrl($scope, $http) {
-	$http({method: 'GET', url: '#/'}).
+	$http({method: 'GET', url: 'index.php/videos', headers: {'Content-Type': 'application/json'}}).
 	success(function(data, status) {
 		$scope.data = data;
 	}).
@@ -64,6 +70,9 @@ function CreateCtrl($scope, $http) {
         $scope.status = status;
 	});	
 }
+
+
+
 
 
 

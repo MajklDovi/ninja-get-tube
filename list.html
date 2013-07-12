@@ -1,11 +1,11 @@
 <!-- PRINT OUT VIDEOS THUMBNAILS -->
-<table ng-controller="VideoListCtrl">
-		<tr ng-repeat="video in data">
-			<td class="image"><img ng-src="{{video.thumbnail.sqDefault}}"></td>
-			<td><h5>{{video.title}}<h5>
-				<h6>Autor: {{video.uploader}}</h6>
-				<h6>Description: {{video.description}}</h6>
-			</td>
-		</tr>
+<table>
+	<tr ng-repeat="video in data">
+		<td class="image"><img ng-src="{{video.image}}"></td>
+		<td><h5>{{video.title}}<h5>
+			<h6>Autor: {{video.author}}</h6>
+			<h6><a href="{{video.link}}">Watch Video</a></a></h6>
+		</td>
+	</tr>
 </table>
 
