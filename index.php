@@ -7,9 +7,10 @@ $app = new \Slim\Slim();
 // define routes 
 $app->get('/videos', 'getVideos');
 $app->get('/', 'getVideos');
+$app->get('/videos/:id', 'getVideo');
 $app->post('/add', 'addVideo');
 $app->post('/', 'addVideo');
-$app->delete('/videos/:id',   'deleteVideo');
+$app->delete('/videos/:id', 'deleteVideo');
  
 // application run
 $app->run();
@@ -52,6 +53,36 @@ function getVideos() {
 	}
 }
  
+// GET video by id 
+function getVideo($id){
+	// SQL select
+    $sql = ("SELECT * FROM videos WHERE id='$id'");
+    try {
+		// connect to dabase
+        $db = getConnection();
+        // apply deleting command
+        $stmt = mysql_query($sql, $db);
+        while ($row = mysql_fetch_assoc($stmt)) {
+			// allow comma between video JSONs
+			$comma = True;
+			$videos->id = $row["id"];
+			$videos->title = $row["title"];
+			$videos->image = $row["image"];
+			$videos->author = $row["author"];
+			$videos->description = $row["description"];
+			$videos->link = $row["link"];
+			
+			echo json_encode($videos);
+			
+		}
+		// set them free
+		mysql_close($db);
+	}catch(PDOException $e) {
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
+	}	
+}
+ 
+ 
 
 // INSERT video
 function addVideo() {
@@ -71,6 +102,7 @@ function addVideo() {
 		}  
 		// set them free
 		mysql_close($db);
+		getVideos();
 	}catch(PDOException $e) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}   
@@ -79,7 +111,7 @@ function addVideo() {
 // DELETE video
 function deleteVideo($id) {
 	// SQL delete 
-    $sql = ("DELETE FROM videos WHERE id =:id");
+    $sql = ("DELETE FROM videos WHERE id ='$id'");
     try {
 		// connect to dabase
         $db = getConnection();

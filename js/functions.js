@@ -10,6 +10,7 @@ angular.module('project', []).
     $routeProvider.
       when('/videos', {controller:ListCtrl, templateUrl:'list.html'}).
       when('/add', {controller:CreateCtrl, templateUrl:'list.html'}).
+      when('/videos/:videoId', {controller:PhoneDetailCtrl, templateUrl:'detail.html'}).
       otherwise({redirectTo:'/videos'});
   }]);
 
@@ -31,32 +32,40 @@ function inputForm() {
 		$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+video_id+'?v=2&alt=jsonc',function(data,status,xhr){
 		//alert(data.data.title);
 		
-		// send POST request
-		$.ajax({
-			type: 'POST',
-			contentType: 'application/json',
-			url: 'index.php/add',
-			dataType: "json",
-			data: JSON.stringify({
-				 "id": video_id,
-				 "title": data.data.title,
-				 "image": data.data.thumbnail.sqDefault,
-				 "author": data.data.uploader,
-				 "description": data.data.description,
-				 "link": url
-			}),
-			success: function(data, textStatus, jqXHR){
-				alert('Video created successfully' + data);
-			},
-			error: function(jqXHR, textStatus, errorThrown){
-				alert('addVideo error: ' + textStatus);
-			}
-		});
+			// send POST request
+			$.ajax({
+				type: 'POST',
+				contentType: 'application/json',
+				url: 'index.php/add',
+				dataType: "json",
+				data: JSON.stringify({
+					 "id": video_id,
+					 "title": data.data.title,
+					 "image": data.data.thumbnail.sqDefault,
+					 "author": data.data.uploader,
+					 "description": data.data.description,
+					 "link": url
+				}),
+				success: function(data, textStatus, jqXHR){
+					alert('Video created successfully');
+				},
+				error: function(jqXHR, textStatus, errorThrown){
+					alert('addVideo error: ' + textStatus);
+				}
+			});
 
 		});
 }
 
-function ListCtrl($scope, $http) {
+
+function PhoneDetailCtrl($scope, $routeParams, $http) {
+  $http.get('index.php/videos/' + $routeParams.videoId).success(function(data) {
+    $scope.video = data;
+  });
+}
+
+
+function ListCtrl($scope, $routeParams, $http) {
 /*	$http({method: 'DELETE', url: 'index.php/videos/', headers: {'Content-Type': 'application/json'}}).
 	success(function(data, status) {
 		$scope.data = data;
@@ -66,6 +75,20 @@ function ListCtrl($scope, $http) {
 		$scope.data = data || "Request failed";
         $scope.status = status;
 	}); */
+}
+
+function DeleteCtrl ($scope, $routeParams, $http) {
+	$http({method: 'DELETE', url: 'index.php/videos/' + $routeParams.videoId, headers: {'Content-Type': 'application/json'}}).
+	success(function(data, status) {
+		$scope.data = data;
+	}).
+	
+	error(function(data, status) {
+		$scope.data = data || "Request failed";
+        $scope.status = status;
+	});	
+	
+
 }
 
 function CreateCtrl($scope, $http) {
