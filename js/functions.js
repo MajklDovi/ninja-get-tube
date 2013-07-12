@@ -22,15 +22,16 @@ function inputForm() {
 		var match = url.match(regExp);
 		if (match&&match[7].length==11){
 			var b=match[7];
-		var video_id = b;
+		var video_id = b; // URL is parsed
 		}else{
 			alert("Not a YouTube address!");
 		}
 
+		// get video information in JSON format
 		$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+video_id+'?v=2&alt=jsonc',function(data,status,xhr){
-			//alert(data.data.title);
+		//alert(data.data.title);
 		
-
+		// send POST request
 		$.ajax({
 			type: 'POST',
 			contentType: 'application/json',
@@ -56,7 +57,15 @@ function inputForm() {
 }
 
 function ListCtrl($scope, $http) {
-
+/*	$http({method: 'DELETE', url: 'index.php/videos/', headers: {'Content-Type': 'application/json'}}).
+	success(function(data, status) {
+		$scope.data = data;
+	}).
+	
+	error(function(data, status) {
+		$scope.data = data || "Request failed";
+        $scope.status = status;
+	}); */
 }
 
 function CreateCtrl($scope, $http) {

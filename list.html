@@ -6,6 +6,7 @@
 			<h6>Autor: {{video.author}}</h6>
 			<h6><a href="{{video.link}}">Watch Video</a></a></h6>
 		</td>
+		<td><input class="btn-danger btn-small" type="submit" value="Delete" ng-click="updateModel('DELETE', '/videos/{{video.id}}')"></td>
 	</tr>
 </table>
 
