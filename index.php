@@ -62,6 +62,11 @@ function getVideo($id){
         $db = getConnection();
         // apply deleting command
         $stmt = mysql_query($sql, $db);
+        
+        if(!$stmt) {
+			// return Status Code (video is not in DB)
+			header("HTTP/1.0 404 Not Found");
+		}
         while ($row = mysql_fetch_assoc($stmt)) {
 			// allow comma between video JSONs
 			$comma = True;
@@ -77,6 +82,9 @@ function getVideo($id){
 		}
 		// set them free
 		mysql_close($db);
+		
+		// return Status Code
+		header("HTTP/1.0 200 OK");
 	}catch(PDOException $e) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}	
@@ -100,9 +108,39 @@ function addVideo() {
 		if(!$retval) {
 			die('Could not enter data: ' . mysql_error());
 		}  
+		
+		// get all videos from database
+		$sql = "select * FROM videos ORDER BY title";
+		$stmt = mysql_query($sql);
+        
+        // making of JSON format (there is no comma at the beginning)
+		echo '[';
+		$comma = False;
+		while ($row = mysql_fetch_assoc($stmt)) {
+			if ($comma){
+				echo ',';
+			}
+			// allow comma between video JSONs
+			$comma = True;
+			$videos->id = $row["id"];
+			$videos->title = $row["title"];
+			$videos->image = $row["image"];
+			$videos->author = $row["author"];
+			$videos->description = $row["description"];
+			$videos->link = $row["link"];
+			
+			echo json_encode($videos);
+			
+		}
+		// end of JSON
+		echo ']';
+		
 		// set them free
 		mysql_close($db);
-		getVideos();
+		
+		// return Status Code
+		header("HTTP/1.0 200 OK");
+		
 	}catch(PDOException $e) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}   
@@ -116,12 +154,18 @@ function deleteVideo($id) {
 		// connect to dabase
         $db = getConnection();
         // apply deleting command
-        $retval = mysql_query($sql, $db);  
+        $retval = mysql_query($sql, $db);
+
 		if(!$retval) {
+			// return Status Code (video is not in DB)
+			header("HTTP/1.0 404 Not Found");
 			die('Could not delete data: ' . mysql_error());
 		}  
 		// set them free
 		mysql_close($db);
+		
+		// return Status Code
+		header("HTTP/1.0 204 No Content");
 	}catch(PDOException $e) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}	

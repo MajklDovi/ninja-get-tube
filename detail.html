@@ -5,7 +5,7 @@
 <h5>Autor:</h5> <h6>{{video.author}}</h6>
 <h5>Link:</h5> <h6><a href="{{video.link}}">{{video.link}}</a></h6>
 <h5>Description:</h5> <h6>{{video.description}}</h6>
-<a href="#/videos" class="btn-danger btn-small" ng-controller="DeleteCtrl">Delete</a>
+<a href="#/videos" class="btn-danger btn-small" ng-controller="DeleteCtrl" ng-click="delete(video)">Delete</a>
 <a href="#/videos" class="btn-primary btn-small">Back</a>
 </div>
 

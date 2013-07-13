@@ -48,6 +48,7 @@ function inputForm() {
 				}),
 				success: function(data, textStatus, jqXHR){
 					alert('Video created successfully');
+					document.location.reload(true);
 				},
 				error: function(jqXHR, textStatus, errorThrown){
 					alert('addVideo error: ' + textStatus);
@@ -66,19 +67,7 @@ function PhoneDetailCtrl($scope, $routeParams, $http) {
 
 
 function ListCtrl($scope, $routeParams, $http) {
-/*	$http({method: 'DELETE', url: 'index.php/videos/', headers: {'Content-Type': 'application/json'}}).
-	success(function(data, status) {
-		$scope.data = data;
-	}).
-	
-	error(function(data, status) {
-		$scope.data = data || "Request failed";
-        $scope.status = status;
-	}); */
-}
-
-function DeleteCtrl ($scope, $routeParams, $http) {
-	$http({method: 'DELETE', url: 'index.php/videos/' + $routeParams.videoId, headers: {'Content-Type': 'application/json'}}).
+	$http({method: 'GET', url: 'index.php/videos', headers: {'Content-Type': 'application/json'}}).
 	success(function(data, status) {
 		$scope.data = data;
 	}).
@@ -87,7 +76,21 @@ function DeleteCtrl ($scope, $routeParams, $http) {
 		$scope.data = data || "Request failed";
         $scope.status = status;
 	});	
-	
+}
+
+function DeleteCtrl ($scope, $routeParams, $http) {
+	$scope.delete = function (){
+		$http({method: 'DELETE', url: 'index.php/videos/' + $routeParams.videoId, headers: {'Content-Type': 'application/json'}}).
+		success(function(data, status) {
+			$scope.data = data;
+			
+		}).
+		
+		error(function(data, status) {
+			$scope.data = data || "Request failed";
+			$scope.status = status;
+		});	
+	}
 
 }
 
