@@ -10,7 +10,7 @@ angular.module('project', []).
     $routeProvider.
       when('/videos', {controller:ListCtrl, templateUrl:'list.html'}).
       when('/add', {controller:CreateCtrl, templateUrl:'list.html'}).
-      when('/videos/:videoId', {controller:PhoneDetailCtrl, templateUrl:'detail.html'}).
+      when('/videos/:videoId', {controller:VideoDetailCtrl, templateUrl:'detail.html'}).
       otherwise({redirectTo:'/videos'});
   }]);
 
@@ -58,14 +58,14 @@ function inputForm() {
 		});
 }
 
-
-function PhoneDetailCtrl($scope, $routeParams, $http) {
+// Controller of video detail (gets one video from database)
+function VideoDetailCtrl($scope, $routeParams, $http) {
   $http.get('index.php/videos/' + $routeParams.videoId).success(function(data) {
     $scope.video = data;
   });
 }
 
-
+// Controller of video list (gets all videos from database)
 function ListCtrl($scope, $routeParams, $http) {
 	$http({method: 'GET', url: 'index.php/videos', headers: {'Content-Type': 'application/json'}}).
 	success(function(data, status) {
@@ -78,6 +78,7 @@ function ListCtrl($scope, $routeParams, $http) {
 	});	
 }
 
+// Controller of video deleting (deletes video from database)
 function DeleteCtrl ($scope, $routeParams, $http) {
 	$scope.delete = function (){
 		$http({method: 'DELETE', url: 'index.php/videos/' + $routeParams.videoId, headers: {'Content-Type': 'application/json'}}).
@@ -94,6 +95,7 @@ function DeleteCtrl ($scope, $routeParams, $http) {
 
 }
 
+// Controller of video list creating
 function CreateCtrl($scope, $http) {
 	$http({method: 'GET', url: 'index.php/videos', headers: {'Content-Type': 'application/json'}}).
 	success(function(data, status) {

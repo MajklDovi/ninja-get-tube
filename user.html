@@ -11,8 +11,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		
-		<!-- <script src="js/project.js"></script>
-		<script src="js/mongolab.js"></script> -->
 		<script src="js/functions.js"></script>
 	</head>
 	<body>
@@ -30,9 +28,9 @@
 				  <li class="active"><a href="#">YouTube DB</a></li>
 				</ul>
 			  </div><!--/.nav-collapse -->
-			</div>
-		  </div>
-		</div>
+			</div><!--/.container -->
+		  </div><!--/.navbar-inner -->
+		</div><!--/.navbar navbar-inverse navbar-fixed-top -->
 
 		<div class="container">
 			<div class="hero-unit">
@@ -45,8 +43,8 @@
 				</div>
 				<hr>
 				<div ng-controller="CreateCtrl">
-					<div ng-view></div> <!-- /list of videos -->
-				</div>
+					<div ng-view></div><!-- /list of videos -->
+				</div><!--/ CreateCtrl -->
 			</div> <!-- /hero-unit -->
 		</div> <!-- /container -->
 
