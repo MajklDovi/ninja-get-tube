@@ -172,9 +172,9 @@ function deleteVideo($id) {
 }
 
 function getConnection() {
-	$db = mysql_connect('localhost:/var/run/mysql/mysql.sock', 'xdovic00', 'ciso7fun');
+	$db = mysql_connect('localhost:/var/run/mysql/mysql.sock', 'user', 'pass');
     	if (!$db) die('nelze se pripojit '.mysql_error());
-    	if (!mysql_select_db('xdovic00', $db)) die('database neni dostupna '.mysql_error());
+    	if (!mysql_select_db('db', $db)) die('database neni dostupna '.mysql_error());
 	return $db;
 }
 
