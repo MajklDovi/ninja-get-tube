@@ -4,7 +4,7 @@ $app = new \Slim\Slim();
 
 error_reporting(E_ALL|E_STRICT);
 
-$db = new PDO('mysql:unix_socket=/var/run/mysql/mysql.sock;dbname=xdovic00', 'xdovic00', 'ciso7fun');
+$db = new PDO('mysql:host=127.0.0.1;dbname=mikko', 'Mikko', 'megabuilders');
 $VideoManager = new VideoManager($db);
 $VideoController = new VideoController($VideoManager);
 

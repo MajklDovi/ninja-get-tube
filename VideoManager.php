@@ -32,12 +32,12 @@ class VideoManager {
 	public function findAll() {
 		$sql = "select * FROM videos ORDER BY title";
 		try {
-            	$db = $this->setup();
+            	$db = $this->db;
         		$stmt = $db->query($sql);
         		$videos = $stmt->fetchAll(PDO::FETCH_OBJ);
         		$db = null;
 
-			self::send($videos, False);
+			    $this->send($videos, False);
 		} catch(Exception $e) {
 			$app->response()->status(500);
 		}
@@ -48,32 +48,34 @@ class VideoManager {
 	public function findOne($id) {
 		$sql = "SELECT * FROM videos WHERE id=:id";
         try {
-            $db =  $this->setup();
+            $db =  $this->db;
             $stmt = $db->prepare($sql);
             $stmt->bindParam("id", $id);
             $stmt->execute();
             $video = $stmt->fetchObject();
             $db = null;
-        echo json_encode($video);
+            echo json_encode($video);
 
         } catch(PDOException $e) {
             echo '{"error":{"text":'. $e->getMessage() .'}}';
         }
+        return $video;
 	}
 	
 	// delete video from DB
 	public function delete($id) {
         $sql = "DELETE FROM videos WHERE id=:id";
         try {
-        $db = $this->setup();
+        $db = $this->db;
             $stmt = $db->prepare($sql);
             $stmt->bindParam("id", $id);
             $stmt->execute();
             $db = null;
-        echo "video successfully deleted";
+            echo "video successfully deleted";
         } catch(PDOException $e) {
             echo '{"error":{"text":'. $e->getMessage() .'}}';
         }
+        return 0;
 		
 		
 	}
@@ -101,15 +103,6 @@ class VideoManager {
 		} catch(Exception $e) {
 			$app->response()->status(500);
 		}
-	}
-
-	public function setup() {
-		// DB connect
-        $db = new PDO('mysql:unix_socket=/var/run/mysql/mysql.sock;dbname=xdovic00', 'xdovic00', 'ciso7fun');
-
-        if (!$db)
-            die('nelze se pripojit');
-        return $db;
 	}
 }
 ?>
