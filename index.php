@@ -1,6 +1,4 @@
 <?php
-require 'VideoManager.php'; // video manager
-require 'VideoController.php'; // video controller
 require 'vendor/autoload.php';
 $app = new \Slim\Slim();
 

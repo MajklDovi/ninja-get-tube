@@ -1,5 +1,10 @@
 <?php
 class VideoController {
+    private $VideoManager;
+    public function __construct(VideoManager $VideoManager){
+        $this->VideoManager = $VideoManager;
+
+    }
 	public function listAction() {
         $var = $this->VideoManager->findAll();
 	}
