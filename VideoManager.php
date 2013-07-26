@@ -1,5 +1,10 @@
 <?php
 class VideoManager {
+    private $db;
+    public function __construct(PDO $db){
+        $this->db = $db;
+
+    }
 	// insert into DB
 	public function save($data) {
         $sql = "INSERT INTO videos (title, image, author, description, link, p) VALUES (:title, :image, :author, :description, :link, :p)";
