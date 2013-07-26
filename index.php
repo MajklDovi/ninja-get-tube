@@ -3,12 +3,14 @@ require 'vendor/autoload.php';
 $app = new \Slim\Slim();
 
 error_reporting(E_ALL|E_STRICT);
+// 'mysql:host=127.0.0.1;dbname=mikko', 'Mikko', 'megabuilders'
+// 'mysql:unix_socket=/var/run/mysql/mysql.sock;dbname=xdovic00', 'xdovic00', 'ciso7fun'
 
-$db = new PDO('mysql:host=127.0.0.1;dbname=mikko', 'Mikko', '****');
+$db = new PDO('mysql:unix_socket=/var/run/mysql/mysql.sock;dbname=xdovic00', 'xdovic00', '****);
 $VideoManager = new VideoManager($db);
 $VideoController = new VideoController($VideoManager);
 
-// define routes 
+// define routes
 $app->get('/videos', array($VideoController , 'listAction'));
 $app->get('/videos/:id', array($VideoController, 'getAction'));
 $app->post('/add', array($VideoController , 'addAction'));

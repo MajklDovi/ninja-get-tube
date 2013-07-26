@@ -9,7 +9,7 @@ class VideoManager {
 	public function save($data) {
         $sql = "INSERT INTO videos (title, image, author, description, link, p) VALUES (:title, :image, :author, :description, :link, :p)";
         try {
-            $db = $this->setup();
+            $db = $this->db;
             $stmt = $db->prepare($sql);
             $stmt->bindParam("title", $data->title);
             $stmt->bindParam("image", $data->image);
@@ -41,7 +41,7 @@ class VideoManager {
 		} catch(Exception $e) {
 			$app->response()->status(500);
 		}
-        return $data;
+        return $videos;
 	}
 	
 	// find one video in DB

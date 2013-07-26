@@ -9,10 +9,10 @@
     },
     "autoload": {
         "psr-0": {
-            "VideoMngr_test" : "/home/mikko/tube/tests",
-            "VideoCtrl_test" : "/home/mikko/tube/tests",
-            "VideoManager" : "/home/mikko/tube/VideoManager.php",
-            "VideoController" : "/home/mikko/tube/VideoController.php"
+            "VideoMngr_test" : "./tests",
+            "VideoCtrl_test" : "./tests",
+            "VideoManager" : ".",
+            "VideoController" : "."
        }
     }
 }

@@ -6,10 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'VideoMngr_test' => array($baseDir . '/tests'),
-    'VideoManager' => array($baseDir . '/VideoManager.php'),
-    'VideoCtrl_test' => array($baseDir . '/tests'),
-    'VideoController' => array($baseDir . '/VideoController.php'),
+    'VideoMngr_test' => array($baseDir . '/../tube/tests'),
+    'VideoManager' => array($baseDir . '/'),
+    'VideoCtrl_test' => array($baseDir . '/../tube/tests'),
+    'VideoController' => array($baseDir . '/'),
     'Slim' => array($vendorDir . '/slim/slim'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
 );
