@@ -29,8 +29,8 @@ function inputForm() {
 		}
 
 		// get video information in JSON format
-		$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+video_id+'?v=2&alt=jsonc',function(data,status,xhr){
-		//alert(data.data.title);
+		$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+video_id+'?v=2&alt=jsonc', function(data,status,xhr){
+		//alert(status);
 		
 			// send POST request
 			$.ajax({
@@ -39,7 +39,7 @@ function inputForm() {
 				url: 'index.php/add',
 				dataType: "json",
 				data: JSON.stringify({
-					 "id": video_id,
+					 "p": video_id,
 					 "title": data.data.title,
 					 "image": data.data.thumbnail.sqDefault,
 					 "author": data.data.uploader,
@@ -52,6 +52,7 @@ function inputForm() {
 				},
 				error: function(jqXHR, textStatus, errorThrown){
 					alert('addVideo error: ' + textStatus);
+					document.location.reload(true);
 				}
 			});
 
@@ -60,9 +61,13 @@ function inputForm() {
 
 // Controller of video detail (gets one video from database)
 function VideoDetailCtrl($scope, $routeParams, $http) {
-  $http.get('index.php/videos/' + $routeParams.videoId).success(function(data) {
-    $scope.video = data;
-  });
+	$http.get('index.php/videos/' + $routeParams.videoId).success(function(data) {
+		$scope.video = data;
+	}).
+	error(function(data, status) {
+		$scope.data = data || "Request failed";
+        $scope.status = status;
+	});
 }
 
 // Controller of video list (gets all videos from database)
@@ -84,7 +89,7 @@ function DeleteCtrl ($scope, $routeParams, $http) {
 		$http({method: 'DELETE', url: 'index.php/videos/' + $routeParams.videoId, headers: {'Content-Type': 'application/json'}}).
 		success(function(data, status) {
 			$scope.data = data;
-			
+			alert('Video ' +data.title+ ' successfully deleted.')
 		}).
 		
 		error(function(data, status) {
