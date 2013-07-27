@@ -9,59 +9,49 @@
 require "bootstrap.php";
 use Mockery as m;
 
-class VideoMngr_test extends Tester\TestCase{
+class VideoManager_test extends Tester\TestCase{
     protected function tearDown(){
         parent::tearDown();
         m::close();
     }
 	public function testFindAll(){
-    	$dbServiceMock = m::mock('VideoManager');
-        //$dbServiceMock->shouldReceive('listAction')->andReturn(array());
-        $videoManager = new VideoManager();
-        $response = $videoManager->findAll();
-        Assert::equal(200, $response->statusCode);
-        Assert::equal('application/json', $response->contentType);
-        Assert::equal(array(), json_decode($response->content, true));
+    	$pdoMock = m::mock('PDO');
+    	$VideoManager = new VideoManager($pdoMock);
+        $VideoManager->shouldReceive('listAction')->andReturn(array());
+       // $videoManager = new VideoManager();
+       // $response = $videoManager->findAll();
+
+        //$pdoMock->shouldReceive('query')->once()->withAnyArgs()->andReturn($statementMock);
+        //shouldReceive('fetchAll')->once()->with(tu das ten PDO::FETCH_BLA BLA)->andReturn(null);
+
+      //  Assert::equal(200, $response->statusCode);
+        //Assert::equal('application/json', $response->contentType);
+        //Assert::equal(array(), json_decode($response->content, true));
 
 
 	}
 
 	public function testFindOne(){
-    	$dbServiceMock = m::mock('VideoManager');
-        $dbServiceMock->shouldReceive('getAction')->andReturn(array());
-        $videoCtrl = new VideoManager($dbServiceMock);
+   /* 	$pdoMock = m::mock('PDO');
+        $VideoManager = new VideoManager($pdoMock);
+        $VideoManager->shouldReceive('getAction')->andReturn(array());
         $response = $videoCtrl->listAction();
         Assert::equal(200, $response->statusCode);
         Assert::equal('application/json', $response->contentType);
-        Assert::equal(array(), json_decode($response->content, true));
+        Assert::equal(array(), json_decode($response->content, true));*/
 
 
 	}
 
     public function testAdd(){
-        $dbServiceMock = m::mock('VideoManager');
-        $dbServiceMock->shouldReceive('addAction')->andReturn(array());
-        $videoCtrl = new VideoManager($dbServiceMock);
-        $response = $videoCtrl->listAction();
-        Assert::equal(200, $response->statusCode);
-        Assert::equal('application/json', $response->contentType);
-        Assert::equal(array(), json_decode($response->content, true));
 
 
     }
 
     public function testDel(){
-        $dbServiceMock = m::mock('VideoManager');
-        $dbServiceMock->shouldReceive('delAction')->andReturn(array());
-        $videoCtrl = new VideoManager($dbServiceMock);
-        $response = $videoCtrl->listAction();
-        Assert::equal(200, $response->statusCode);
-        Assert::equal('application/json', $response->contentType);
-        Assert::equal(array(), json_decode($response->content, true));
-
 
     }
 }
 
-run(new VideoMngr_test());
+run(new VideoManager_test());
 ?>

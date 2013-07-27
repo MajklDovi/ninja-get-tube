@@ -16,7 +16,8 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
 	public function testListAction(){
-        $videoManager = new videoManager();
+	    $pdoMock = m::mock('PDO');
+        $videoManager = new videoManager($pdoMock);
         $response = $videoManager->findAll();
         Assert::equal(200,$response->statusCode);
         Assert::equal('application/json', $response->contentType);
