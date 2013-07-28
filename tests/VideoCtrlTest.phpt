@@ -6,7 +6,7 @@
  *
  */
 
-require "bootstrap.php";
+require __DIR__."/bootstrap.php";
 use Mockery as m;
 
 class VideoCtrl_test  extends Tester\TestCase{
@@ -59,4 +59,3 @@ class VideoCtrl_test  extends Tester\TestCase{
 	}
 }
 run(new VideoCtrl_test());
-?>

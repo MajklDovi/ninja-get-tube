@@ -24,4 +24,4 @@ class VideoController {
 		$var = $this->VideoManager->delete($id);
 	}
 }
-?>
+
