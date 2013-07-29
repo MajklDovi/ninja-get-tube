@@ -18,8 +18,9 @@ class VideoManager_test extends Tester\TestCase{
     	$pdoMock = m::mock('PDO');
     	$VideoManager = new VideoManager($pdoMock);
         $response = $VideoManager->findAll();
+       // $sql = "select * FROM videos ORDER BY title";
 
-        $pdoMock->shouldReceive('query')->once()->withAnyArgs()->andReturn($statementMock);
+        //$pdoMock->shouldReceive('query')->once()->with($sql)->andReturn($statementMock);
         //$pdoMock->shouldReceive('fetchAll')->once()->with(PDO::FETCH_OBJ)->andReturn(null);
 
       //  Assert::equal(200, $response->statusCode);
