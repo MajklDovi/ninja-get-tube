@@ -17,11 +17,10 @@ class VideoManager_test extends Tester\TestCase{
 	public function testFindAll(){
     	$pdoMock = m::mock('PDO');
     	$VideoManager = new VideoManager($pdoMock);
-        $VideoManager->shouldReceive('listAction')->andReturn(array());
         $response = $VideoManager->findAll();
 
-        //$pdoMock->shouldReceive('query')->once()->withAnyArgs()->andReturn($statementMock);
-        shouldReceive('fetchAll')->once()->with(PDO::FETCH_OBJ)->andReturn(null);
+        $pdoMock->shouldReceive('query')->once()->withAnyArgs()->andReturn($statementMock);
+        //$pdoMock->shouldReceive('fetchAll')->once()->with(PDO::FETCH_OBJ)->andReturn(null);
 
       //  Assert::equal(200, $response->statusCode);
         //Assert::equal('application/json', $response->contentType);

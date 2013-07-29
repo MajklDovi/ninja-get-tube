@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ComposerAutoloaderInita66b733babbfea723ee6cc6774a83450' => $vendorDir . '/composer/autoload_real.php',
+    'ComposerAutoloaderInit17b30b12865f0128139a7b15c5690fad' => $vendorDir . '/composer/autoload_real.php',
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
     'ContainerTest' => $vendorDir . '/mockery/mockery/tests/Mockery/ContainerTest.php',
     'ContentTypesTest' => $vendorDir . '/slim/slim/tests/Middleware/ContentTypesTest.php',

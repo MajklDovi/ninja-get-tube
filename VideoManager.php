@@ -32,14 +32,14 @@ class VideoManager {
 	public function findAll() {
 		$sql = "select * FROM videos ORDER BY title";
 		try {
-            	$db = $this->db;
-        		$stmt = $db->query($sql);
-        		$videos = $stmt->fetchAll(PDO::FETCH_OBJ);
-        		$db = null;
+            $db = $this->db;
+        	$stmt = $db->query($sql);
+        	$videos = $stmt->fetchAll(PDO::FETCH_OBJ);
+        	$db = null;
 
-			    $this->send($videos, False);
+            $this->send($videos, False);
 		} catch(Exception $e) {
-			$app->response()->status(500);
+			//$app->response()->status(500);
 		}
         return $videos;
 	}
