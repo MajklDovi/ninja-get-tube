@@ -20,8 +20,10 @@ class VideoCtrl_test  extends Tester\TestCase{
 	    $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager);
 
-        $videoController->listAction();
+
         $videoManager->shouldReceive('findAll')->once()->andReturn(array());
+        $videoController->listAction();
+
         Assert::equal(200,$response->statusCode);
       //  Assert::equal('application/json', $response->contentType);
     //    Assert::equal(array(), json_decode($response->content, true));

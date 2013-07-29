@@ -39,8 +39,9 @@ class VideoManager {
 
             $this->send($videos, False);
 		} catch(Exception $e) {
-			//$app->response()->status(500);
+			$app->response()->status(500);
 		}
+        $app->response()->status(200);
         return $videos;
 	}
 	
