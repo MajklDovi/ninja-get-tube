@@ -1,12 +1,14 @@
 <?php
 class VideoController {
     private $VideoManager;
-    public function __construct(VideoManager $VideoManager){
+    public function __construct(VideoManager $VideoManager, $app){
         $this->VideoManager = $VideoManager;
+        $this->app = $app;
 
     }
 	public function listAction() {
         $var = $this->VideoManager->findAll();
+        $this->app->response()->status(200);
 	}
 
 	public function getAction($id) {
@@ -14,10 +16,11 @@ class VideoController {
 	}
 
 	public function addAction() {
-		$request = \Slim\Slim::getInstance()->request();
+		$app = \Slim\Slim::getInstance()->request();
 		$data = json_decode($request->getBody());
 
 		$var = $this->VideoManager->save($data);
+        $this->app->response()->status(200);
 	}
 
 	public function delAction($id) {
