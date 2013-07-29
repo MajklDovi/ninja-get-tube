@@ -17,16 +17,18 @@ class VideoCtrl_test  extends Tester\TestCase{
 
 	public function testListAction(){
 	    $pdoMock = m::mock('PDO');
+	    $app = m::mock('app');
 	    $videoManager = m::mock('VideoManager', array($pdoMock));
-        $videoController = new VideoController($videoManager);
+        $videoController = new VideoController($videoManager, $app);
 
-
+        $app->shouldReceive('status');
+        $app->shouldReceive('response')->once()->andReturn($app);
         $videoManager->shouldReceive('findAll')->once()->andReturn(array());
         $videoController->listAction();
 
-        Assert::equal(200,$response->statusCode);
-      //  Assert::equal('application/json', $response->contentType);
-    //    Assert::equal(array(), json_decode($response->content, true));
+        Assert::equal(200, $response);
+        Assert::equal('application/json', $response->contentType);
+        Assert::equal(array(), json_decode($response->content, true));
 	}
 
 /*	public function testAddAction(){
