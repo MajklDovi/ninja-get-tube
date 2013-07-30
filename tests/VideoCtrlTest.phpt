@@ -15,9 +15,9 @@ class VideoCtrl_test  extends Tester\TestCase{
         m::close();
     }
 
-	public function testListAction(){
-	    $pdoMock = m::mock('PDO');
-	    $app = m::mock('app');
+    public function testListAction(){
+        $pdoMock = m::mock('PDO');
+        $app = m::mock('app');
 	    $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
 
@@ -26,7 +26,7 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('findAll')->once()->andReturn(array());
         $videoController->listAction();
-	}
+    }
 
 	public function testAddAction(){
 	    $pdoMock = m::mock('PDO');
