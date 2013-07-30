@@ -1,7 +1,7 @@
 <?php
 class VideoManager {
     private $db;
-    public function __construct(PDO $db = null){
+    public function __construct(IConnection $db = null){
         $this->db = $db;
     }
 	// insert into DB

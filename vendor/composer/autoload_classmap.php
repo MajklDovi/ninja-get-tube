@@ -6,8 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ComposerAutoloaderInit17b30b12865f0128139a7b15c5690fad' => $vendorDir . '/composer/autoload_real.php',
+    'ComposerAutoloaderInit89cd433ce09a709f71c97f69362dd19f' => $vendorDir . '/composer/autoload_real.php',
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
+    'Connection' => $baseDir . '/drivers/Connection.php',
     'ContainerTest' => $vendorDir . '/mockery/mockery/tests/Mockery/ContainerTest.php',
     'ContentTypesTest' => $vendorDir . '/slim/slim/tests/Middleware/ContentTypesTest.php',
     'CookiesTest' => $vendorDir . '/slim/slim/tests/Http/CookiesTest.php',
@@ -22,10 +23,12 @@ return array(
     'Gateway' => $vendorDir . '/mockery/mockery/tests/Mockery/ContainerTest.php',
     'HamcrestExpectationTest' => $vendorDir . '/mockery/mockery/tests/Mockery/HamcrestExpectationTest.php',
     'HeadersTest' => $vendorDir . '/slim/slim/tests/Http/HeadersTest.php',
+    'IConnection' => $baseDir . '/drivers/IConnection.php',
     'LogTest' => $vendorDir . '/slim/slim/tests/LogTest.php',
     'LogWriterTest' => $vendorDir . '/slim/slim/tests/LogWriterTest.php',
     'MethodOverrideTest' => $vendorDir . '/slim/slim/tests/Middleware/MethodOverrideTest.php',
     'MiddlewareTest' => $vendorDir . '/slim/slim/tests/MiddlewareTest.php',
+    'MockPDOHelper' => $baseDir . '/tests/bootstrap.php',
     'Mockery' => $vendorDir . '/mockery/mockery/library/Mockery.php',
     'MockeryFoo3' => $vendorDir . '/mockery/mockery/tests/Mockery/ContainerTest.php',
     'MockeryFoo4' => $vendorDir . '/mockery/mockery/tests/Mockery/ContainerTest.php',
