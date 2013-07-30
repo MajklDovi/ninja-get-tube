@@ -21,7 +21,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
     public function testListAction(){
-        $pdoMock = m::mock('PDO[FETCH_OBJ]');
+        $pdoMock = m::mock('MockPDOHelper');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -32,7 +32,7 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoController->listAction();
 
         /*---------------------------Exception---------------------------*/
-        $pdoMock = m::mock('PDO');
+        $pdoMock = m::mock('MockPDOHelper');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -44,7 +44,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
    /* public function testAddAction(){
-        $pdoMock = m::mock('PDO');
+        $pdoMock = m::mock('MockPDOHelper');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
