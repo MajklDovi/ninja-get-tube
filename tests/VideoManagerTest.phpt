@@ -45,7 +45,7 @@ class VideoManager_test extends Tester\TestCase{
         Assert::equal($response, array());
 	}
 
-/*    public function testAdd(){
+    public function testAdd(){
         $pdoMock = m::mock('iConnection');
         $stmtnMock = m::mock('stdClass');
         $VideoManager = new VideoManager($pdoMock);
@@ -73,7 +73,7 @@ class VideoManager_test extends Tester\TestCase{
 
         $response = $VideoManager->save($data);
         Assert::equal($response, $data);
-    }*/
+    }
 
     public function testDel(){
         $pdoMock = m::mock('iConnection');
@@ -87,7 +87,7 @@ class VideoManager_test extends Tester\TestCase{
         $stmtnMock->shouldReceive('bindParam')->once()->with("id", $id)->andReturn($stmtnMock);
         $stmtnMock->shouldReceive('execute')->once()->andReturn($stmtnMock);
 
-        $response = $VideoManager->findOne($id);
+        $response = $VideoManager->delete($id);
         Assert::equal($response, 0);
     }
 }
