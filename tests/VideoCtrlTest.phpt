@@ -23,8 +23,7 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('response')->once()->andReturn($app);
-        $videoManager->shouldReceive('findAll')->once()->andThrow('\PDOException');
-        // Fatal error: Class '\PDOException' not found in /home/mikko/ninja-get-tube/vendor/mockery/mockery/library/Mockery/Expectation.php on line 403
+        $videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('findAll')->once()->andReturn(array());
         $videoController->listAction();
 	}
@@ -44,11 +43,12 @@ class VideoCtrl_test  extends Tester\TestCase{
             "p" => "dsf4cv"
         );
 
-/*        $app->shouldReceive('status');
-        //$app->shouldReceive('request')->once()->andReturn(array());
+        $app->shouldReceive('status');
+        $app->shouldReceive('request')->once()->andReturn(array());
+        $videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
         $app->shouldReceive('response')->once()->andReturn($app);
         $videoManager->shouldReceive('save')->once()->with($data)->andReturn(array());
-        $videoController->addAction();*/
+        $videoController->addAction();
 	}
 
 	public function testGetAction(){
@@ -61,6 +61,7 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('response')->once()->andReturn($app);
+        $videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('findOne')->once()->andReturn(array());
         $videoController->getAction($id);
 	}
@@ -75,6 +76,7 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('response')->once()->andReturn($app);
+        $videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('delete')->once()->andReturn(0);
         $videoController->delAction($id);
 	}

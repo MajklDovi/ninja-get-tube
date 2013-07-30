@@ -22,7 +22,7 @@ class VideoManager {
             $db = null;
             echo json_encode($data);
 
-        } catch(PDOException $e) {
+        } catch(RuntimeException $e) {
             echo '{"error":{"text":'. $e->getMessage() .'}}';
         }
         return $data;
@@ -38,7 +38,7 @@ class VideoManager {
         	$db = null;
 
             $this->send($videos, False);
-		} catch(Exception $e) {
+		} catch(RuntimeException $e) {
             echo '{"error":{"text":'. $e->getMessage() .'}}';
 		}
         return $videos;
@@ -56,7 +56,7 @@ class VideoManager {
             $db = null;
             echo json_encode($video);
 
-        } catch(PDOException $e) {
+        } catch(RuntimeException $e) {
             echo '{"error":{"text":'. $e->getMessage() .'}}';
         }
         return $video;
@@ -72,7 +72,7 @@ class VideoManager {
             $stmt->execute();
             $db = null;
             echo "video successfully deleted";
-        } catch(PDOException $e) {
+        } catch(RuntimeException $e) {
             echo '{"error":{"text":'. $e->getMessage() .'}}';
         }
         return 0;
@@ -100,7 +100,7 @@ class VideoManager {
 			if(!$one){
 				echo ']';
 			}
-		} catch(Exception $e) {
+		} catch(RuntimeException $e) {
             echo '{"error":{"text":'. $e->getMessage() .'}}';
 		}
 	}
