@@ -15,14 +15,15 @@ class VideoManager_test extends Tester\TestCase{
         m::close();
     }
 	public function testFindAll(){
-    	$pdoMock = m::mock('PDO[query, FETCH_OBJ]');
+    	$pdoMock = m::mock('PDO[query]');
+    	$stmtnMock = m::mock('stdClass');
     	$VideoManager = new VideoManager($pdoMock);
 
         $sql = "select * FROM videos ORDER BY title";
 
         $pdoMock->shouldReceive('query')->once()->with($sql)->andReturn($pdoMock);
         // 5 => constant value of PDO::FETCH_OBJ
-        $pdoMock->shouldReceive('fetchAll')->once()->with(5)->andReturn(null);
+        $stmtnMock->shouldReceive('fetchAll')->once()->with(5)->andReturn(null);
 
         $response = $VideoManager->findAll();
 	}
