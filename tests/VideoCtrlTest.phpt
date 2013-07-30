@@ -44,7 +44,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
    /* public function testAddAction(){
-        $pdoMock = m::mock('MockPDOHelper');
+        $pdoMock = m::mock('MockPDOHelper[query]');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);

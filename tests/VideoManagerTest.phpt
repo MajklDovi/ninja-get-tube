@@ -19,7 +19,7 @@ class VideoManager_test extends Tester\TestCase{
         m::close();
     }
 	public function testFindAll(){
-    	$pdoMock = m::mock('MockPDOHelper');
+    	$pdoMock = m::mock('MockPDOHelper[query]');
     	$stmtnMock = m::mock('stdClass');
     	$VideoManager = new VideoManager($pdoMock);
 
