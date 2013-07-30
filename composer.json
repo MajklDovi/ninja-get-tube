@@ -8,9 +8,6 @@
         "nette/tester": "0.9.2"
     },
     "autoload": {
-        "classmap": ["./drivers", "IConnection.php"],
-        "classmap": ["./drivers", "Connection.php"],
-        "classmap": [".", "VideoManager.php"],
-        "classmap": [".", "VideoController.php"]
+        "files": ["drivers/IConnection.php", "drivers/Connection.php", "VideoManager.php", "VideoController.php"]
     }
 }

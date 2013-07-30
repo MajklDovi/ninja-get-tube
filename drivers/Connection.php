@@ -1,5 +1,6 @@
 <?php
-class Connection implements IConnection {
+class Connection extends PDO implements IConnection {
     public function query() {}
     public function prepare($prepareString) {}
 }
+

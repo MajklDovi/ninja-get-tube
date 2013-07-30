@@ -16,7 +16,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
     public function testListAction(){
-        $pdoMock = m::mock('iConnection');
+        $pdoMock = m::mock('IConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -27,7 +27,7 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoController->listAction();
 
         /*---------------------------Exception---------------------------*/
-        $pdoMock = m::mock('iConnection');
+        $pdoMock = m::mock('IConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -39,7 +39,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
     public function testAddAction(){
-        $pdoMock = m::mock('iConnection');
+        $pdoMock = m::mock('IConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -61,7 +61,7 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoController->addAction();
 
         /*---------------------------Exception---------------------------*/
-        $pdoMock = m::mock('iConnection');
+        $pdoMock = m::mock('IConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -75,7 +75,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
     public function testGetAction(){
-        $pdoMock = m::mock('iConnection');
+        $pdoMock = m::mock('IConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -88,7 +88,7 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoController->getAction($id);
 
         /*---------------------------Exception---------------------------*/
-        $pdoMock = m::mock('iConnection');
+        $pdoMock = m::mock('IConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -102,7 +102,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
     public function testDelAction(){
-        $pdoMock = m::mock('iConnection');
+        $pdoMock = m::mock('IConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -115,7 +115,7 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoController->delAction($id);
 
         /*---------------------------Exception---------------------------*/
-        $pdoMock = m::mock('iConnection');
+        $pdoMock = m::mock('IConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
