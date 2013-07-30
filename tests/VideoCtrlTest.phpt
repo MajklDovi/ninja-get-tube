@@ -45,9 +45,9 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('request')->once()->andReturn(array());
-        $videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
         $app->shouldReceive('response')->once()->andReturn($app);
-        $videoManager->shouldReceive('save')->once()->with($data)->andReturn(array());
+        $videoManager->shouldReceive('save')->once()->andThrow('RuntimeException');
+        $videoManager->shouldReceive('save')->once()->with(m::subset($data))->andReturn(array());
         $videoController->addAction();
 	}
 
@@ -61,7 +61,7 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('response')->once()->andReturn($app);
-        $videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
+        $videoManager->shouldReceive('findOne')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('findOne')->once()->andReturn(array());
         $videoController->getAction($id);
 	}
@@ -76,7 +76,7 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('response')->once()->andReturn($app);
-        $videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
+        $videoManager->shouldReceive('delete')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('delete')->once()->andReturn(0);
         $videoController->delAction($id);
 	}

@@ -7,27 +7,41 @@ class VideoController {
 
     }
 	public function listAction() {
-        $var = $this->VideoManager->findAll();
+        try {
+            $var = $this->VideoManager->findAll();
+        } catch(RuntimeException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
         $this->app->response()->status(200);
 	}
 
 	public function getAction($id) {
-		$var = $this->VideoManager->findOne($id);
+		try {
+            $var = $this->VideoManager->findOne($id);
+        } catch(RuntimeException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
         $this->app->response()->status(200);
 	}
 
 	public function addAction() {
 		//$app = $this->app->request();
 		//$data = json_decode($request->getBody());
-        $this->app->request();
-        $data = json_decode($this->app->request->getBody());
-
-		$var = $this->VideoManager->save($data);
+        $data = json_decode($this->app->request());
+        try {
+            $var = $this->VideoManager->save($data);
+        } catch(RuntimeException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
         $this->app->response()->status(200);
 	}
 
 	public function delAction($id) {
-		$var = $this->VideoManager->delete($id);
+		try {
+            $var = $this->VideoManager->delete($id);
+        } catch(RuntimeException $e) {
+            echo '{"error":{"text":'. $e->getMessage() .'}}';
+        }
         $this->app->response()->status(200);
 	}
 }
