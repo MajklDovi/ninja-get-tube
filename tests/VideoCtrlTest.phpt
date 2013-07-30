@@ -18,7 +18,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     public function testListAction(){
         $pdoMock = m::mock('PDO');
         $app = m::mock('app');
-	    $videoManager = m::mock('VideoManager', array($pdoMock));
+        $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
 
         $app->shouldReceive('status');
@@ -28,8 +28,8 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoController->listAction();
     }
 
-	public function testAddAction(){
-	    $pdoMock = m::mock('PDO');
+    public function testAddAction(){
+        $pdoMock = m::mock('PDO');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
