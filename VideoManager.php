@@ -3,7 +3,6 @@ class VideoManager {
     private $db;
     public function __construct(PDO $db = null){
         $this->db = $db;
-
     }
 	// insert into DB
 	public function save($data) {
