@@ -55,7 +55,7 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('request')->once()->andReturn($app);
-        $app->shouldReceive('getBody')->once()->andReturn(json_encode(array()));
+        $app->shouldReceive('getBody')->once()->andReturn(json_encode($data));
         $app->shouldReceive('response')->once()->andReturn($app);
         $videoManager->shouldReceive('save')->once()->with(m::subset($data))->andReturn(array());
         $videoController->addAction();
@@ -68,7 +68,7 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('request')->once()->andReturn($app);
-        $app->shouldReceive('getBody')->once()->andReturn(json_encode(array()));
+        $app->shouldReceive('getBody')->once()->andReturn(json_encode($data));
         $app->shouldReceive('response')->once()->andReturn($app);
         $videoManager->shouldReceive('save')->once()->with(m::subset($data))->andThrow('RuntimeException');
         $videoController->addAction();
