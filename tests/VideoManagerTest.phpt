@@ -5,7 +5,7 @@
  * Author: Michal Dovičovič
  *
  */
-
+use Tester\Assert;
 require __DIR__."/bootstrap.php";
 use Mockery as m;
 
@@ -17,12 +17,13 @@ class VideoManager_test extends Tester\TestCase{
 	public function testFindAll(){
     	$pdoMock = m::mock('PDO');
     	$VideoManager = new VideoManager($pdoMock);
+
+        $sql = "select * FROM videos ORDER BY title";
+
+        $pdoMock->shouldReceive('query')->once()->with($sql)->andReturn($statementMock);
+//        $pdoMock->shouldReceive('fetchAll')->once()->with(PDO::FETCH_OBJ)->andReturn(null);
+
         $response = $VideoManager->findAll();
-       // $sql = "select * FROM videos ORDER BY title";
-
-        //$pdoMock->shouldReceive('query')->once()->with($sql)->andReturn($statementMock);
-        //$pdoMock->shouldReceive('fetchAll')->once()->with(PDO::FETCH_OBJ)->andReturn(null);
-
       //  Assert::equal(200, $response->statusCode);
         //Assert::equal('application/json', $response->contentType);
         //Assert::equal(array(), json_decode($response->content, true));
@@ -30,19 +31,24 @@ class VideoManager_test extends Tester\TestCase{
 
 	}
 
-	/*public function testFindOne(){
-    	$pdoMock = m::mock('PDO');
+	public function testFindOne(){
+/*    	$pdoMock = m::mock('PDO');
         $VideoManager = new VideoManager($pdoMock);
-        $VideoManager->shouldReceive('getAction')->andReturn(array());
-        $response = $videoCtrl->listAction();
+
+        $id = 9;
+        $VideoManager->shouldReceive('findOne')->andReturn(array());
+
+
+        $response = $videoManager->findOne($id);
+
         Assert::equal(200, $response->statusCode);
         Assert::equal('application/json', $response->contentType);
         Assert::equal(array(), json_decode($response->content, true));
-
+*/
 
 	}
 
-    public function testAdd(){
+   /* public function testAdd(){
 
 
     }

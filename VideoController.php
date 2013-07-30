@@ -13,11 +13,14 @@ class VideoController {
 
 	public function getAction($id) {
 		$var = $this->VideoManager->findOne($id);
+        $this->app->response()->status(200);
 	}
 
 	public function addAction() {
-		$app = \Slim\Slim::getInstance()->request();
-		$data = json_decode($request->getBody());
+		//$app = $this->app->request();
+		//$data = json_decode($request->getBody());
+        $this->app->request();
+        $data = json_decode($this->app->request->getBody());
 
 		$var = $this->VideoManager->save($data);
         $this->app->response()->status(200);
@@ -25,6 +28,7 @@ class VideoController {
 
 	public function delAction($id) {
 		$var = $this->VideoManager->delete($id);
+        $this->app->response()->status(200);
 	}
 }
 
