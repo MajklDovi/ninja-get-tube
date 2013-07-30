@@ -3,8 +3,6 @@ require __DIR__."/../vendor/autoload.php";
 
 date_default_timezone_set('Europe/Bratislava');
 
-class MockPDOHelper extends PDO { public function __construct () {} }
-
 /**
 * Runs test case
 *

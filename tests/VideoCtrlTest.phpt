@@ -9,11 +9,6 @@ use Tester\Assert;
 require __DIR__."/bootstrap.php";
 use Mockery as m;
 
-class PDOMock extends PDO {
-        public function __construct(){
-        }
-}
-
 class VideoCtrl_test  extends Tester\TestCase{
     protected function tearDown(){
         parent::tearDown();
@@ -21,7 +16,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
     public function testListAction(){
-        $pdoMock = m::mock('MockPDOHelper[query]');
+        $pdoMock = m::mock('iConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -32,7 +27,7 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoController->listAction();
 
         /*---------------------------Exception---------------------------*/
-        $pdoMock = m::mock('MockPDOHelper[query]');
+        $pdoMock = m::mock('iConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -43,8 +38,8 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoController->listAction();
     }
 
-   /* public function testAddAction(){
-        $pdoMock = m::mock('MockPDOHelper[query]');
+    public function testAddAction(){
+        $pdoMock = m::mock('iConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -65,8 +60,8 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoManager->shouldReceive('save')->once()->with(m::subset($data))->andReturn(array());
         $videoController->addAction();
 
-        /---------------------------Exception---------------------------/
-        $pdoMock = m::mock('PDO');
+        /*---------------------------Exception---------------------------*/
+        $pdoMock = m::mock('iConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -80,7 +75,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
     public function testGetAction(){
-        $pdoMock = m::mock('PDO');
+        $pdoMock = m::mock('iConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -92,8 +87,8 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoManager->shouldReceive('findOne')->once()->andReturn(array());
         $videoController->getAction($id);
 
-        /---------------------------Exception---------------------------/
-        $pdoMock = m::mock('PDO');
+        /*---------------------------Exception---------------------------*/
+        $pdoMock = m::mock('iConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -107,7 +102,7 @@ class VideoCtrl_test  extends Tester\TestCase{
     }
 
     public function testDelAction(){
-        $pdoMock = m::mock('PDO');
+        $pdoMock = m::mock('iConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -119,8 +114,8 @@ class VideoCtrl_test  extends Tester\TestCase{
         $videoManager->shouldReceive('delete')->once()->andReturn(0);
         $videoController->delAction($id);
 
-        /---------------------------Exception---------------------------/
-        $pdoMock = m::mock('PDO');
+        /*---------------------------Exception---------------------------*/
+        $pdoMock = m::mock('iConnection');
         $app = m::mock('app');
         $videoManager = m::mock('VideoManager', array($pdoMock));
         $videoController = new VideoController($videoManager, $app);
@@ -131,6 +126,6 @@ class VideoCtrl_test  extends Tester\TestCase{
         $app->shouldReceive('response')->once()->andReturn($app);
         $videoManager->shouldReceive('delete')->once()->andThrow('RuntimeException');
         $videoController->delAction($id);
-    }*/
+    }
 }
 run(new VideoCtrl_test());
