@@ -15,47 +15,47 @@ class VideoManager_test extends Tester\TestCase{
         m::close();
     }
 	public function testFindAll(){
-    	$pdoMock = m::mock('PDO');
+    	$pdoMock = m::mock('PDO[query, FETCH_OBJ]');
     	$VideoManager = new VideoManager($pdoMock);
 
         $sql = "select * FROM videos ORDER BY title";
 
-        $pdoMock->shouldReceive('query')->once()->with($sql)->andReturn($statementMock);
-        //$pdoMock->shouldReceive('fetchAll')->once()->with(PDO::FETCH_OBJ)->andReturn(null);
-
+        $pdoMock->shouldReceive('query')->once()->with($sql)->andReturn($pdoMock);
+        // 5 => constant value of PDO::FETCH_OBJ
+        $pdoMock->shouldReceive('fetchAll')->once()->with(5)->andReturn(null);
 
         $response = $VideoManager->findAll();
-      //  Assert::equal(200, $response->statusCode);
-        //Assert::equal('application/json', $response->contentType);
-        //Assert::equal(array(), json_decode($response->content, true));
-
-
 	}
 
-	public function testFindOne(){
-/*    	$pdoMock = m::mock('PDO');
+/*	public function testFindOne(){
+        $pdoMock = m::mock('PDO');
         $VideoManager = new VideoManager($pdoMock);
 
         $id = 9;
-        $VideoManager->shouldReceive('findOne')->andReturn(array());
+        $sql = "SELECT * FROM videos WHERE id=".$id;
 
+        $pdoMock->shouldReceive('prepare')->once()->with($sql)->andReturn($pdoMock);
+        $pdoMock->shouldReceive('fetchObject')->once()->andReturn(array());
 
-        $response = $videoManager->findOne($id);
-
-        Assert::equal(200, $response->statusCode);
-        Assert::equal('application/json', $response->contentType);
-        Assert::equal(array(), json_decode($response->content, true));
-*/
-
-	}
+        $response = $VideoManager->findOne($id);
+	}*/
 
    /* public function testAdd(){
 
 
     }
+*/
+   /* public function testDel(){
+        $pdoMock = m::mock('PDO');
+        $VideoManager = new VideoManager($pdoMock);
 
-    public function testDel(){
+        $id = 9;
+        $sql = "DELETE FROM videos WHERE id=".$id;
 
+        $pdoMock->shouldReceive('prepare')->once()->with($sql)->andReturn($pdoMock);
+        $pdoMock->shouldReceive('execute')->once()->andReturn(array());
+
+        $response = $VideoManager->findOne($id);
     }*/
 }
 

@@ -31,7 +31,8 @@ class VideoManager {
 
         $db = $this->db;
         $stmt = $db->query($sql);
-        $videos = $stmt->fetchAll(PDO::FETCH_OBJ);
+        // 5 => constant value of PDO::FETCH_OBJ
+        $videos = $stmt->fetchAll(5);
         $db = null;
 
         $this->send($videos, False);
