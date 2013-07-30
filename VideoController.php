@@ -10,7 +10,7 @@ class VideoController {
         try {
             $var = $this->VideoManager->findAll();
         } catch(RuntimeException $e) {
-            echo '{"error":{"text":'. $e->getMessage() .'}}';
+            $this->app->response()->status(500);
         }
         $this->app->response()->status(200);
 	}
@@ -19,7 +19,7 @@ class VideoController {
 		try {
             $var = $this->VideoManager->findOne($id);
         } catch(RuntimeException $e) {
-            echo '{"error":{"text":'. $e->getMessage() .'}}';
+            $this->app->response()->status(500);
         }
         $this->app->response()->status(200);
 	}
@@ -31,7 +31,7 @@ class VideoController {
         try {
             $var = $this->VideoManager->save($data);
         } catch(RuntimeException $e) {
-            echo '{"error":{"text":'. $e->getMessage() .'}}';
+            $this->app->response()->status(500);
         }
         $this->app->response()->status(200);
 	}
@@ -40,7 +40,7 @@ class VideoController {
 		try {
             $var = $this->VideoManager->delete($id);
         } catch(RuntimeException $e) {
-            echo '{"error":{"text":'. $e->getMessage() .'}}';
+            $this->app->response()->status(500);
         }
         $this->app->response()->status(200);
 	}

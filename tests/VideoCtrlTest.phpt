@@ -44,7 +44,8 @@ class VideoCtrl_test  extends Tester\TestCase{
         );
 
         $app->shouldReceive('status');
-        $app->shouldReceive('request')->once()->andReturn(array());
+        $app->shouldReceive('request')->once()->andReturn($app);
+        $app->shouldReceive('getBody')->once()->andReturn(array());
         $app->shouldReceive('response')->once()->andReturn($app);
         $videoManager->shouldReceive('save')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('save')->once()->with(m::subset($data))->andReturn(array());
