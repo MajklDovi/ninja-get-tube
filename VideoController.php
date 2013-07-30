@@ -26,8 +26,8 @@ class VideoController {
 
 	public function addAction() {
 		//$app = $this->app->request();
-		//$data = json_decode($request->getBody());
-        $data = json_decode($this->app->request());
+		$data = $this->app->request()->getBody();
+        $data = json_decode($data, true);
         try {
             $var = $this->VideoManager->save($data);
         } catch(RuntimeException $e) {

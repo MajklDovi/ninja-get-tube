@@ -23,8 +23,18 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('response')->once()->andReturn($app);
-        //$videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('findAll')->once()->andReturn(array());
+        $videoController->listAction();
+
+        /*---------------------------Exception---------------------------*/
+        $pdoMock = m::mock('PDO');
+        $app = m::mock('app');
+        $videoManager = m::mock('VideoManager', array($pdoMock));
+        $videoController = new VideoController($videoManager, $app);
+
+        $app->shouldReceive('status');
+        $app->shouldReceive('response')->once()->andReturn($app);
+        $videoManager->shouldReceive('findAll')->once()->andThrow('RuntimeException');
         $videoController->listAction();
     }
 
@@ -45,10 +55,22 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('request')->once()->andReturn($app);
-        $app->shouldReceive('getBody')->once()->andReturn(array());
+        $app->shouldReceive('getBody')->once()->andReturn(json_encode(array()));
         $app->shouldReceive('response')->once()->andReturn($app);
-        //$videoManager->shouldReceive('save')->once()->with(m::subset($data))->andThrow('RuntimeException');
         $videoManager->shouldReceive('save')->once()->with(m::subset($data))->andReturn(array());
+        $videoController->addAction();
+
+        /*---------------------------Exception---------------------------*/
+        $pdoMock = m::mock('PDO');
+        $app = m::mock('app');
+        $videoManager = m::mock('VideoManager', array($pdoMock));
+        $videoController = new VideoController($videoManager, $app);
+
+        $app->shouldReceive('status');
+        $app->shouldReceive('request')->once()->andReturn($app);
+        $app->shouldReceive('getBody')->once()->andReturn(json_encode(array()));
+        $app->shouldReceive('response')->once()->andReturn($app);
+        $videoManager->shouldReceive('save')->once()->with(m::subset($data))->andThrow('RuntimeException');
         $videoController->addAction();
     }
 
@@ -62,8 +84,20 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('response')->once()->andReturn($app);
-        //$videoManager->shouldReceive('findOne')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('findOne')->once()->andReturn(array());
+        $videoController->getAction($id);
+
+        /*---------------------------Exception---------------------------*/
+        $pdoMock = m::mock('PDO');
+        $app = m::mock('app');
+        $videoManager = m::mock('VideoManager', array($pdoMock));
+        $videoController = new VideoController($videoManager, $app);
+
+        $id = 9;
+
+        $app->shouldReceive('status');
+        $app->shouldReceive('response')->once()->andReturn($app);
+        $videoManager->shouldReceive('findOne')->once()->andThrow('RuntimeException');
         $videoController->getAction($id);
     }
 
@@ -77,8 +111,20 @@ class VideoCtrl_test  extends Tester\TestCase{
 
         $app->shouldReceive('status');
         $app->shouldReceive('response')->once()->andReturn($app);
-        //$videoManager->shouldReceive('delete')->once()->andThrow('RuntimeException');
         $videoManager->shouldReceive('delete')->once()->andReturn(0);
+        $videoController->delAction($id);
+
+        /*---------------------------Exception---------------------------*/
+        $pdoMock = m::mock('PDO');
+        $app = m::mock('app');
+        $videoManager = m::mock('VideoManager', array($pdoMock));
+        $videoController = new VideoController($videoManager, $app);
+
+        $id = 9;
+
+        $app->shouldReceive('status');
+        $app->shouldReceive('response')->once()->andReturn($app);
+        $videoManager->shouldReceive('delete')->once()->andThrow('RuntimeException');
         $videoController->delAction($id);
     }
 }
