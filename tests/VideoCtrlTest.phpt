@@ -9,6 +9,11 @@ use Tester\Assert;
 require __DIR__."/bootstrap.php";
 use Mockery as m;
 
+class PDOMock extends PDO {
+        public function __construct(){
+        }
+}
+
 class VideoCtrl_test  extends Tester\TestCase{
     protected function tearDown(){
         parent::tearDown();
